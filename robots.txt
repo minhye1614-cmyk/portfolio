@@ -1,0 +1,8 @@
+User-agent : *
+Allow : /
+
+$ git config --global user.nave "minhye"
+
+$ git config --global user.email "minhye1614@gmail.com"
+
+$git config --list

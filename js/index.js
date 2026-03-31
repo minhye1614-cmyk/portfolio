@@ -45,13 +45,6 @@ $(function () {
 
   //popup
   $('.portfolio-item').each(function (index, el) {
-      $(el).mouseenter(function () {
-          $(this).find('iframe')[0].play()
-      })
-      $(el).mouseleave(function () {
-          $(this).find('iframe')[0].pause()
-          $(this).find('iframe')[0].currentTime = 0
-      })
       $(el).click(function () {
           const title = $(this).find('h2').text()
           const text = $(this).find('.text').text()
@@ -85,14 +78,10 @@ $(function () {
         //   $('.popup').find('.bl').attr('src',imglink9)
         //   $('.popup').find('.su').attr('src',imglink10)
         //   $('.popup').find('.ty').attr('src',imglink11)
-          $('.popup').find('video').attr('src', videolink)
-
           $('.popup').addClass('on')
-          $('.popup').find('video')[0].play()
       })
   })
   $('.popup button').click(function () {
       $('.popup').removeClass('on')
-         
   })
 })

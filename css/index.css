@@ -368,19 +368,22 @@ main {
   margin-right: 10px;
 }
 
-.license {
+/* .license {
   margin-top: 30px;
-}
+} */
 
 .skill-icons {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .skill-icons img {
   width: 50px;
   height: 50px;
+  max-width: 100%;
 }
 
 .portfolio {
@@ -537,13 +540,17 @@ main {
   left: -100%;
   background-color: #222;
   z-index: 99;
-  padding: 20vh 7vw 14vh;
+  padding: 15vh 7vw 14vh;
   display: flex;
   justify-content: space-between;
+  opacity: 0;
+  visibility: hidden;
   transition: all .5s;
 }
 
 .popup.on {
+  opacity: 1;
+  visibility: visible;
   left: 0;
 }
 
@@ -576,6 +583,9 @@ main {
   font-size: 2rem;
   margin: 20px 0;
   color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 140px;
 }
 
 .popup figure {
@@ -625,6 +635,11 @@ main {
 
   .skill-icons {
     justify-content: center;
+  }
+
+  .skill-icons img {
+    width: 40px;
+    height: 40px;
   }
 }
 

@@ -43,29 +43,69 @@ $(function () {
       }, 2000)
   })
 
-  //popup
-  $('.portfolio-item').each(function (index, el) {
-      $(el).click(function () {
-          const title = $(this).find('h2').text()
-          const text = $(this).find('.text').html()
-          const tool = $(this).find('h3').text()
-          const toolHTML = $(this).find('.tool').html();
-          const videolink = $(this).find('iframe').attr('src')
+  $('.portfolio-item').click(function () {
 
-          $('.popup').find('iframe').attr('src', videolink)
-          $('.popup').find('h2').text(title)
-          $('.popup').find('p').html(text)
-          $('.popup').find('h3').text(tool)
-          $('.popup').find('.tool').html(toolHTML)
-        //   $('.popup').find('iframe').attr('src', videolink)
-          $('.popup').addClass('on')
-      })
-  })
-//   $('.popup button').click(function () {
-//       $('.popup').removeClass('on')
-//   })
-  $('.popup button').click(function () {
-    $('.popup').removeClass('on')
-    $('.popup iframe').attr('src', '')
-})
+    const id = $(this).data('id');
+    const data = portfolioData[id];
+  
+    $('#modalText').html(data.text);
+  
+    /* 이미지 초기화 */
+    $('#modalImages').html("");
+  
+    if (data.type === "video") {
+  
+      data.videos.forEach(video => {
+  
+        const box = `
+          <div class="video-box">
+            <h3>${video.title}</h3>
+  
+            <video autoplay muted loop playsinline>
+              <source src="${video.src}" type="video/mp4">
+            </video>
+  
+          </div>
+        `;
+  
+        $('#modalImages').append(box);
+      });
+  
+    } else {
+  
+      data.images.forEach(src => {
+        $('#modalImages').append(`<img src="${src}">`);
+      });
+  
+    }
+  
+    /* tools */
+    $('#modalTools').html("");
+    data.tools.forEach(tool => {
+      $('#modalTools').append(`<img src="${tool}">`);
+    });
+  
+    $('#portfolioModal').fadeIn();
+    $('body').css('overflow', 'hidden');
+  });
+  
+  
+  /* ===== 닫기 (완전 수정 버전) ===== */
+  function stopVideos() {
+    $('#modalImages video').each(function () {
+      this.pause();
+      this.currentTime = 0;
+    });
+  }
+  
+  $('.close-btn, #portfolioModal').click(function (e) {
+    if (e.target !== this) return;
+  
+    $('#portfolioModal').fadeOut();
+    $('body').css('overflow', 'auto');
+  
+    stopVideos();
+    $('#modalImages').html("");
+  });
+
 })
